@@ -1,4 +1,4 @@
-function ship(length) {
+export default function ship(length) {
   let numTimesHit = 0;
   const hit = () => {
     numTimesHit++;
@@ -9,4 +9,3 @@ function ship(length) {
   return { hit, isSunk };
 }
 
-module.exports = { ship };

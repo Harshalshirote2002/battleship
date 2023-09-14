@@ -1,7 +1,13 @@
 import "../styles.css";
-console.log("I am connected");
+import createHeader from "./header.js";
+import updateDisplay from "./UI.js";
 
-const body = document.querySelector("body");
-const div = document.createElement("h1");
-div.textContent = "I am a level 1 heading!";
-body.appendChild(div);
+export default function updateUI() {
+  const body = document.querySelector("body");
+  const header = createHeader();
+  const main = updateDisplay();
+  body.textContent = '';
+  body.append(header, main);
+}
+
+updateUI();

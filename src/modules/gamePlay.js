@@ -1,4 +1,5 @@
-import { gameBoard } from "../modules/gameBoard.js";
+import gameBoard from "./gameBoard.js";
+import updateUI from "./index.js";
 let flag = 0;
 let gameWinStatus = 0;
 
@@ -18,9 +19,9 @@ let cpuPositions = [
   { start: [10, 8], end: [10, 10] },
 ];
 
-let player = gameBoard(playerPositions);
+export const player = gameBoard(playerPositions);
 
-let cpuPlayer = gameBoard(cpuPositions);
+export const cpuPlayer = gameBoard(cpuPositions);
 
 function randomCoordinateGenerator() {
   let i = Math.floor(Math.random() * 10) + 1;
@@ -29,32 +30,37 @@ function randomCoordinateGenerator() {
 }
 
 function cpuMove(player) {
-  let [i, j] = randomCoordinateGenerator();
-  if (player.board[i][j].isHit) {
-    cpuMove(player);
+  let i, j;
+  do {
+    [i, j] = randomCoordinateGenerator();
+  } while (player.board[i][j].isHit);
+  player.receiveAttack([i, j]);
+  return;
+}
+
+export function playerMove(cpuPlayer, position_x, position_y) {
+  if (cpuPlayer.board[position_x][position_y].isHit) {
+    alert("cell is already hit!");
   } else {
-    player.receiveAttack([i, j]);
-    return;
-  }
-}
-
-function playerMove(cpuPlayer) {
-  //write it
-}
-
-while (gameWinStatus === 0) {
-  if (flag === 0) {
-    playerMove(cpuPlayer);
-    flag = 1;
-  } else if (flag === 1) {
+    cpuPlayer.receiveAttack([position_x, position_y]);
     cpuMove(player);
-    flag = 0;
-  }
-  if (player.allSunk()) {
-    gameWinStatus = 1;
-    alert("game won by CPU!");
-  } else if (cpuPlayer.allSunk()) {
-    gameWinStatus = 1;
-    alert("game won by player!");
+    updateUI();
   }
 }
+
+// while (gameWinStatus === 0) {
+//   if (flag === 0) {
+//     playerMove(cpuPlayer);
+//     flag = 1;
+//   } else if (flag === 1) {
+//     cpuMove(player);
+//     flag = 0;
+//   }
+//   if (player.allSunk()) {
+//     gameWinStatus = 1;
+//     alert("game won by CPU!");
+//   } else if (cpuPlayer.allSunk()) {
+//     gameWinStatus = 1;
+//     alert("game won by player!");
+//   }
+// }

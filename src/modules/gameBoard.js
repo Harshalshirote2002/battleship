@@ -1,16 +1,16 @@
-import { ship } from "./ship.js";
+import ship from "./ship.js";
 
-class boardCell{
-  constructor(){
+class boardCell {
+  constructor() {
     this.isHit = false;
     this.shipName = null;
     this.isShip = false;
   }
-  
+
   hitCell = () => {
     this.isHit = true;
   };
-  makeShipCell = (someShipName)=>{
+  makeShipCell = (someShipName) => {
     if (!this.isShip) {
       this.shipName = `${someShipName}`;
     }
@@ -18,12 +18,12 @@ class boardCell{
   };
 }
 
-function gameBoard(positions) {
+export default function gameBoard(positions) {
   let board = [];
   for (let i = 1; i <= 10; i++) {
     board[i] = [];
     for (let j = 1; j <= 10; j++) {
-      board[i][j] = new boardCell;
+      board[i][j] = new boardCell();
     }
   }
   const ships = {
@@ -70,5 +70,3 @@ function gameBoard(positions) {
   };
   return { ships, board, allSunk, receiveAttack };
 }
-
-module.exports = { gameBoard };
