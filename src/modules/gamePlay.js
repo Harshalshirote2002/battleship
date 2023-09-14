@@ -23,6 +23,16 @@ export const player = gameBoard(playerPositions);
 
 export const cpuPlayer = gameBoard(cpuPositions);
 
+function gameStatusCheck(){
+  if (player.allSunk()){
+    alert("CPU wins the game!");
+    gameWinStatus = 1;
+  }else if(cpuPlayer.allSunk()){
+    alert("Player wins the game!");
+    gameWinStatus = 1;;
+  }
+}
+
 function randomCoordinateGenerator() {
   let i = Math.floor(Math.random() * 10) + 1;
   let j = Math.floor(Math.random() * 10) + 1;
@@ -35,6 +45,7 @@ function cpuMove(player) {
     [i, j] = randomCoordinateGenerator();
   } while (player.board[i][j].isHit);
   player.receiveAttack([i, j]);
+  gameStatusCheck();
   return;
 }
 
@@ -43,24 +54,11 @@ export function playerMove(cpuPlayer, position_x, position_y) {
     alert("cell is already hit!");
   } else {
     cpuPlayer.receiveAttack([position_x, position_y]);
+    gameStatusCheck();
     cpuMove(player);
     updateUI();
   }
 }
 
-// while (gameWinStatus === 0) {
-//   if (flag === 0) {
-//     playerMove(cpuPlayer);
-//     flag = 1;
-//   } else if (flag === 1) {
-//     cpuMove(player);
-//     flag = 0;
-//   }
-//   if (player.allSunk()) {
-//     gameWinStatus = 1;
-//     alert("game won by CPU!");
-//   } else if (cpuPlayer.allSunk()) {
-//     gameWinStatus = 1;
-//     alert("game won by player!");
-//   }
-// }
+
+
