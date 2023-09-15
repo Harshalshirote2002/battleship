@@ -209,8 +209,10 @@ function formSubmitEvent(e) {
     }
   }
   if(checkValidity(finalPositions)){
+    dialog.close();
     placePlayerShips(finalPositions);
     updateUI();
+    console.log("updateUI called");
   }else{
     alert("invalid coordinates!");
   }

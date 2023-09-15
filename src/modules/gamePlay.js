@@ -1,7 +1,12 @@
 import gameBoard from "./gameBoard.js";
 import updateUI from "./index.js";
 let flag = 0;
-let gameWinStatus = 0;
+export let gameWinStatus = 0;
+
+export function toggleGameWinStatus(){
+  gameWinStatus = 0;
+  cpuPlayer = gameBoard(cpuPositions);
+}
 
 export let player;
 
@@ -17,7 +22,7 @@ let cpuPositions = [
   { start: [9, 6], end: [9, 7] },
 ];
 
-export const cpuPlayer = gameBoard(cpuPositions);
+export let cpuPlayer = gameBoard(cpuPositions);
 
 function gameStatusCheck() {
   if (player.allSunk()) {
