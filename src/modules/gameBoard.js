@@ -27,11 +27,11 @@ export default function gameBoard(positions) {
     }
   }
   const ships = {
-    ship1: ship(1),
-    ship2: ship(3),
-    ship3: ship(1),
-    ship4: ship(5),
-    ship5: ship(3),
+    ship1: ship(5),
+    ship2: ship(4),
+    ship3: ship(3),
+    ship4: ship(3),
+    ship5: ship(2),
   };
   for (let p = 0; p < positions.length; p++) {
     let start = positions[p].start;

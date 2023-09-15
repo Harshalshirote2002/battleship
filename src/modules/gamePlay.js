@@ -3,33 +3,29 @@ import updateUI from "./index.js";
 let flag = 0;
 let gameWinStatus = 0;
 
-let playerPositions = [
-  { start: [2, 8], end: [2, 8] },
-  { start: [1, 1], end: [1, 3] },
-  { start: [4, 2], end: [4, 2] },
-  { start: [7, 3], end: [7, 7] },
-  { start: [10, 8], end: [10, 10] },
-];
+export let player;
+
+export const placePlayerShips = (positions) => {
+  player = gameBoard(positions);
+};
 
 let cpuPositions = [
-  { start: [2, 8], end: [2, 8] },
-  { start: [1, 1], end: [1, 3] },
-  { start: [4, 2], end: [4, 2] },
-  { start: [7, 3], end: [7, 7] },
-  { start: [10, 8], end: [10, 10] },
+  { start: [1, 1], end: [1, 5] },
+  { start: [2, 2], end: [2, 5] },
+  { start: [7, 10], end: [9, 10] },
+  { start: [10, 1], end: [10, 3] },
+  { start: [9, 6], end: [9, 7] },
 ];
-
-export const player = gameBoard(playerPositions);
 
 export const cpuPlayer = gameBoard(cpuPositions);
 
-function gameStatusCheck(){
-  if (player.allSunk()){
+function gameStatusCheck() {
+  if (player.allSunk()) {
     alert("CPU wins the game!");
     gameWinStatus = 1;
-  }else if(cpuPlayer.allSunk()){
+  } else if (cpuPlayer.allSunk()) {
     alert("Player wins the game!");
-    gameWinStatus = 1;;
+    gameWinStatus = 1;
   }
 }
 
@@ -59,6 +55,3 @@ export function playerMove(cpuPlayer, position_x, position_y) {
     updateUI();
   }
 }
-
-
-
